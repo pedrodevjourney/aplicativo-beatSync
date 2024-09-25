@@ -20,7 +20,7 @@ export const PlaylistScreen = () => {
       setLoading(true)
       setError(null)
 
-      const playlistResponse = await fetch(`http://192.168.2.168:8000/api/playlists?name=${playlistName}`)
+      const playlistResponse = await fetch(`http://10.0.0.244:8000/api/playlists?name=${playlistName}`)
       if (!playlistResponse.ok) {
         throw new Error('Erro ao buscar playlists!')
       }
@@ -34,7 +34,7 @@ export const PlaylistScreen = () => {
 
       const playlistsWithTracks = await Promise.all(
         fetchedPlaylists.map(async (playlist: { id: number; name: string }) => {
-          const tracksResponse = await fetch(`http://192.168.2.168:8000/api/playlists/${playlist.id}/songs`)
+          const tracksResponse = await fetch(`http://10.0.0.244:8000/api/playlists/${playlist.id}/songs`)
           if (!tracksResponse.ok) {
             throw new Error(`Erro ao buscar músicas da playlist ${playlist.name}!`)
           }

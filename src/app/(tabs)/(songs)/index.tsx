@@ -19,7 +19,7 @@ const SongsScreen = () => {
 	// Função para recuperar as músicas da API
 	async function fetchMusicas() {
 		try {
-			const response = await fetch('http://192.168.2.168:8000/api/songs')
+			const response = await fetch('http://10.0.0.244:8000/api/songs')
 			const body = await response.json()
 			const tracks: Track[] = body.map((item: Track) => ({
 				id: item.id,

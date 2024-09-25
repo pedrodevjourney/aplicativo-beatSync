@@ -21,7 +21,7 @@ const PlaylistsScreen = () => {
 	// Função para buscar as playlists(GET PLAYLISTS)
 	async function fetchPlaylists() {
 		try {
-			const response = await fetch('http://192.168.2.168:8000/api/playlists')
+			const response = await fetch('http://10.0.0.244:8000/api/playlists')
 			const body = await response.json()
 
 			const playlistMusic: Playlist[] = body.map((item: Playlist) => ({
@@ -39,7 +39,7 @@ const PlaylistsScreen = () => {
 	// Função para buscar as músicas de uma playlist específica(GET musicas dentro da playlist)
 	async function fetchPlaylistTracks(playlistId: number): Promise<Track[]> {
 		try {
-			const response = await fetch(`http://192.168.2.168:8000/api/playlists/${playlistId}/songs`)
+			const response = await fetch(`http://10.0.0.244:8000/api/playlists/${playlistId}/songs`)
 			const body = await response.json()
 
 			const tracks: Track[] = body.map((item: Track) => ({

@@ -26,7 +26,7 @@ const AddToPlaylistModal = () => {
 	// Função para buscar músicas válidas da API(GET songs)
 	const fetchSongs = async () => {
 		try {
-			const response = await fetch('http://192.168.2.168:8000/api/songs')
+			const response = await fetch('http://10.0.0.244:8000/api/songs')
 			const data = await response.json()
 
 			const validSongs = data.map((song: any) => ({
@@ -48,7 +48,7 @@ const AddToPlaylistModal = () => {
 	//(GET playlists)
 	const fetchPlaylists = async () => {
 		try {
-			const response = await fetch('http://192.168.2.168:8000/api/playlists')
+			const response = await fetch('http://10.0.0.244:8000/api/playlists')
 			const data = await response.json()
 
 			const playlistMusica: Playlist[] = data.map((item: any) => ({
@@ -72,7 +72,7 @@ const AddToPlaylistModal = () => {
 		}
 
 		try {
-			const response = await fetch(`http://192.168.2.168:8000/api/playlists/${playlistId}/songs`, {
+			const response = await fetch(`http://10.0.0.244:8000/api/playlists/${playlistId}/songs`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -89,33 +89,6 @@ const AddToPlaylistModal = () => {
 			console.log(`Música ${track.id} foi adicionada à playlist: ${playlistId} com sucesso!`)
 		} catch (error) {
 			console.error('Erro ao adicionar a música à playlist: ', error)
-		}
-	}
-
-	const removeSongToPlaylist = async (playlistId: number, track: Track) => {
-		if (!track || !track.id) {
-			console.error('A música não possui um ID válido!')
-			return
-		}
-
-		try {
-			const response = await fetch(`http://192.168.2.168:8000/api/playlists/${playlistId}/songs`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					song_id: track.id,
-				}),
-			})
-
-			if (!response.ok) {
-				throw new Error('Erro ao remover a música à playlist!')
-			}
-
-			console.log(`Música ${track.id} foi removida da playlist: ${playlistId} com sucesso!`)
-		} catch (error) {
-			console.error('Erro ao remover a música à playlist!')
 		}
 	}
 

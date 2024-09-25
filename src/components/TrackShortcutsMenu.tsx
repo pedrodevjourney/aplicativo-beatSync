@@ -37,11 +37,9 @@ export const TrackShortcutsMenu = ({ track, children }: TrackShortMenuProps) => 
 				}
 			})
 			.with('add-to-playlist', () => {
-				
 				router.push({ pathname: '(modals)/addToPlaylist', params: { trackUrl: track.url } })
 			})
 			.with('remove-from-playlist', async () => {
-				
 				if (activeQueueId?.startsWith('playlist')) {
 					const queue = await TrackPlayer.getQueue()
 					const trackToRemove = queue.findIndex((queueTrack) => queueTrack.url === track.url)
@@ -49,6 +47,8 @@ export const TrackShortcutsMenu = ({ track, children }: TrackShortMenuProps) => 
 					if (trackToRemove !== -1) {
 						await TrackPlayer.remove(trackToRemove)
 					}
+				} else {
+					console.warn('A música não está em uma playlist.')
 				}
 			})
 			.otherwise(() => console.warn(`Ação do menu é desconhecida ${id}`))
